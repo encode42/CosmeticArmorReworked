@@ -1,5 +1,6 @@
 package lain.mods.cos.impl.network.packet;
 
+import lain.mods.cos.impl.ModConfigs;
 import lain.mods.cos.impl.ModObjects;
 import lain.mods.cos.impl.inventory.InventoryCosArmor;
 import lain.mods.cos.impl.network.NetworkManager.NetworkPacket;
@@ -24,7 +25,7 @@ public class PacketSyncCosArmor implements NetworkPacket {
             throw new IllegalArgumentException();
         this.uuid = uuid;
         this.slot = slot;
-        this.isSkinArmor = inventory.isSkinArmor(slot);
+        this.isSkinArmor = ModConfigs.CosArmorEnableHiding.get() && inventory.isSkinArmor(slot);
         this.itemCosArmor = inventory.getStackInSlot(slot);
     }
 

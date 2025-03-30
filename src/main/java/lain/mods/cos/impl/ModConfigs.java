@@ -20,6 +20,7 @@ public class ModConfigs {
     public static BooleanValue CosArmorKeepThroughDeath;
     public static BooleanValue CosArmorDisableRecipeBook;
     public static BooleanValue CosArmorDisableCosHatCommand;
+    public static BooleanValue CosArmorEnableHiding;
 
     public static void registerConfigs() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, new ForgeConfigSpec.Builder() {
@@ -67,6 +68,9 @@ public class ModConfigs {
                 CosArmorDisableCosHatCommand = comment("Whether or not to disable the coshat command")
                         .translation("cos.config.CosArmorDisableCosHatCommand")
                         .define("CosArmorDisableCosHatCommand", false);
+                CosArmorEnableHiding = comment("Whether or not to enable the ability to hide armor")
+                    .translation("cos.config.CosArmorEnableHiding")
+                    .define("CosArmorEnableHiding", true);
                 pop();
             }
         }.build());

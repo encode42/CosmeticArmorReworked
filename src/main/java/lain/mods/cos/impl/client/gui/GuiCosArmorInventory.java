@@ -135,15 +135,18 @@ public class GuiCosArmorInventory extends EffectRenderingInventoryScreen<Contain
                 buttonClicked = true;
             }));
         }
-        InventoryCosArmor invCosArmor = ModObjects.invMan.getCosArmorInventoryClient(mc.player.getUUID());
-        for (int i = 0; i < 4; i++) {
-            int j = 3 - i;
-            addRenderableWidget(new GuiCosArmorToggleButton(leftPos + 97 + 18 * i, topPos + 61, 5, 5, Component.empty(), invCosArmor.isSkinArmor(j) ? 1 : 0, button -> {
-                InventoryCosArmor inv = ModObjects.invMan.getCosArmorInventoryClient(mc.player.getUUID());
-                inv.setSkinArmor(j, !inv.isSkinArmor(j));
-                ((GuiCosArmorToggleButton) button).state = inv.isSkinArmor(j) ? 1 : 0;
-                ModObjects.network.sendToServer(new PacketSetSkinArmor(j, inv.isSkinArmor(j)));
-            }));
+
+        if (ModConfigs.CosArmorEnableHiding.get()) {
+            InventoryCosArmor invCosArmor = ModObjects.invMan.getCosArmorInventoryClient(mc.player.getUUID());
+            for (int i = 0; i < 4; i++) {
+                int j = 3 - i;
+                addRenderableWidget(new GuiCosArmorToggleButton(leftPos + 97 + 18 * i, topPos + 61, 5, 5, Component.empty(), invCosArmor.isSkinArmor(j) ? 1 : 0, button -> {
+                    InventoryCosArmor inv = ModObjects.invMan.getCosArmorInventoryClient(mc.player.getUUID());
+                    inv.setSkinArmor(j, !inv.isSkinArmor(j));
+                    ((GuiCosArmorToggleButton) button).state = inv.isSkinArmor(j) ? 1 : 0;
+                    ModObjects.network.sendToServer(new PacketSetSkinArmor(j, inv.isSkinArmor(j)));
+                }));
+            }
         }
     }
 
